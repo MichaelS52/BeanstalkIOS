@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F788DFE31B1A82E70000BC94 /* MainGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = F788DFE21B1A82E70000BC94 /* MainGame.swift */; };
 		F7CD01B21B193A9200D06AAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CD01B11B193A9200D06AAC /* AppDelegate.swift */; };
 		F7CD01B41B193A9200D06AAC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F7CD01B31B193A9200D06AAC /* GameScene.sks */; };
 		F7CD01B61B193A9200D06AAC /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CD01B51B193A9200D06AAC /* GameScene.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F788DFE21B1A82E70000BC94 /* MainGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainGame.swift; sourceTree = "<group>"; };
 		F7CD01AC1B193A9200D06AAC /* Beanstalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Beanstalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7CD01B01B193A9200D06AAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F7CD01B11B193A9200D06AAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				F7CD01B11B193A9200D06AAC /* AppDelegate.swift */,
 				F7CD01B31B193A9200D06AAC /* GameScene.sks */,
 				F7CD01B51B193A9200D06AAC /* GameScene.swift */,
+				F788DFE21B1A82E70000BC94 /* MainGame.swift */,
 				F7CD01B71B193A9200D06AAC /* GameViewController.swift */,
 				F7CD01B91B193A9300D06AAC /* Main.storyboard */,
 				F7CD01BC1B193A9300D06AAC /* Images.xcassets */,
@@ -219,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F788DFE31B1A82E70000BC94 /* MainGame.swift in Sources */,
 				F7CD01B61B193A9200D06AAC /* GameScene.swift in Sources */,
 				F7CD01B81B193A9200D06AAC /* GameViewController.swift in Sources */,
 				F7CD01B21B193A9200D06AAC /* AppDelegate.swift in Sources */,
@@ -419,6 +423,7 @@
 				F7CD01D11B193A9300D06AAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F7CD01D21B193A9300D06AAC /* Build configuration list for PBXNativeTarget "BeanstalkTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +432,7 @@
 				F7CD01D41B193A9300D06AAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -9,10 +9,11 @@
 import Foundation
 import SpriteKit
 
-let MaxDeviation = 10
+let MaxDeviation = 8
 let MaxHeight = 100
-let SectionHeight = 60
-let SectionWidth = 40
+let SectionHeight = 100
+let SectionWidth = 60
+let straightDelay = 7
 
 struct vineStruct {
     var direction: Int
@@ -26,7 +27,7 @@ class MainGame: SKScene {
     var object: SKSpriteNode!
     
     var start = false
-    
+    var straightCount = straightDelay;
     func buildVine() {
         var height = 0
         var deviation = MaxDeviation/2;
@@ -35,19 +36,34 @@ class MainGame: SKScene {
         for var i = 0; i < MaxHeight; i++ {
             var object = SKSpriteNode(color: UIColor.greenColor(), size: CGSize(width: SectionWidth, height: SectionHeight))
             let currentHeight = CGFloat(SectionHeight * i)
-            let r = Int(arc4random_uniform(UInt32(MaxDeviation)))
-            if (r < deviation) {
-                deviation--;
+            straightCount--;
+            if (straightCount == 0) {
+                let r = Int(arc4random_uniform(UInt32(MaxDeviation)))
+                let oldDev = deviation;
+            
+                if (r < deviation) {
+                    deviation--;
+                }
+                if (deviation < 0) {
+                    deviation = 0
+                }
+                if (r > deviation) {
+                    deviation++
+                }
+                if (deviation > MaxDeviation) {
+                    deviation = MaxDeviation
+                }
+                if oldDev != deviation {
+                var WideObject = SKSpriteNode(color: UIColor.greenColor(), size: CGSize(width: SectionWidth, height: SectionHeight))
+                    let curX = midX + CGFloat((oldDev - MaxDeviation/2) * SectionWidth)
+                    WideObject.position = CGPoint(x: curX, y:currentHeight)
+                    let newElem = vineStruct(direction: 0, sprite: WideObject)
+                    vineArray.append(newElem)
+                    addChild(WideObject)
+                }
+                straightCount = straightDelay;
             }
-            if (deviation < 0) {
-                deviation = 0
-            }
-            if (r > deviation) {
-                deviation++
-            }
-            if (deviation > MaxDeviation) {
-                deviation = MaxDeviation
-            }
+
             let curX = midX + CGFloat((deviation - MaxDeviation/2) * SectionWidth)
             println ("add block @ \(curX),\(currentHeight)")
             object.position = CGPoint(x: curX, y: currentHeight)
@@ -60,7 +76,7 @@ class MainGame: SKScene {
     
     func moveVine() {
         for vine in vineArray {
-            vine.sprite.position.y -= 10;
+            vine.sprite.position.y -= 8;
         }
     }
     

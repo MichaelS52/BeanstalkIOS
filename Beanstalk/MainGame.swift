@@ -5,6 +5,12 @@
 //  Created by Bill Sylva on 5/30/15.
 //  Copyright (c) 2015 Bill Sylva. All rights reserved.
 //
+//
+// To Do:
+// Add temp guy placeholder
+// Add swipe
+// In movevine(), check character intersects any block
+// Handle levels in buildvine() and movevine()
 
 import Foundation
 import SpriteKit
@@ -28,6 +34,8 @@ class MainGame: SKScene {
     
     var start = false
     var straightCount = straightDelay;
+    
+    
     func buildVine() {
         var height = 0
         var deviation = MaxDeviation/2;

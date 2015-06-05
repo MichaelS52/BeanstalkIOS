@@ -7,8 +7,8 @@
 //
 //
 // To Do:
-// Add temp guy placeholder
-// Add swipe
+//
+// Add swipe to jack
 // In movevine(), check character intersects any block
 // Handle levels in buildvine() and movevine()
 
@@ -34,8 +34,26 @@ class MainGame: SKScene {
     
     var start = false
     var straightCount = straightDelay;
+    var jack: SKSpriteNode!
+    
+    func swipedRight(sender:UISwipeGestureRecognizer){
+        println("swiped right")
+    }
+    
+    func swipedLeft(sender:UISwipeGestureRecognizer){
+        println("swiped left")
+    }
+    
+    func swipedUp(sender:UISwipeGestureRecognizer){
+        println("swiped up")
+    }
+    
+    func swipedDown(sender:UISwipeGestureRecognizer){
+        println("swiped down")
+    }
     
     
+
     func buildVine() {
         var height = 0
         var deviation = MaxDeviation/2;
@@ -96,8 +114,30 @@ class MainGame: SKScene {
         let x  = self.userData!["level"] as! Int
         
         println("start scene with level \(x)")
-        buildVine()
+        let swipeRight:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipedRight:"))
+        swipeRight.direction = .Right
+        view.addGestureRecognizer(swipeRight)
         
+        
+        let swipeLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipedLeft:"))
+        swipeLeft.direction = .Left
+        view.addGestureRecognizer(swipeLeft)
+        
+        
+        let swipeUp:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipedUp:"))
+        swipeUp.direction = .Up
+        view.addGestureRecognizer(swipeUp)
+        
+        
+        let swipeDown:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipedDown:"))
+        swipeDown.direction = .Down
+        view.addGestureRecognizer(swipeDown)
+        
+        buildVine()
+
+        jack = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: 20, height: 20))
+        jack.position = CGPoint(x: self.size.width/2.0, y: 100)
+        addChild(jack)
     }
     
     

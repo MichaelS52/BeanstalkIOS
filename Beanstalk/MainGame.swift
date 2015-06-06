@@ -99,7 +99,7 @@ class MainGame: SKScene {
                 var WideObject = SKSpriteNode(color: UIColor.greenColor(), size: CGSize(width: SectionWidth, height: SectionHeight))
                     let curX = midX + CGFloat((oldDev - MaxDeviation/2) * SectionWidth)
                     WideObject.position = CGPoint(x: curX, y:currentHeight)
-                    let newElem = vineStruct(deviation: deviation, sprite: WideObject)
+                    let newElem = vineStruct(deviation: oldDev, sprite: WideObject)
                     vineArray.append(newElem)
                     addChild(WideObject)
                 }
@@ -107,7 +107,7 @@ class MainGame: SKScene {
             }
 
             let curX = midX + CGFloat((deviation - MaxDeviation/2) * SectionWidth)
-            println ("add block @ \(curX),\(currentHeight)")
+            // println ("add block @ \(curX),\(currentHeight)")
             object.position = CGPoint(x: curX, y: currentHeight)
             let newElem = vineStruct(deviation: deviation, sprite: object)
             vineArray.append(newElem)
@@ -139,12 +139,15 @@ class MainGame: SKScene {
     func die() {
         
         var amount : Int = vineArray.count
+        println("amount = \(amount)")
         var sceneheight = UIScreen.mainScreen().bounds.height
         
         println("Scene Height: \(sceneheight)")
         
         var vineHeight : CGFloat = vineArray.first!.sprite.size.height;
         
+        var vineHeight : CGFloat = vineArray.first!.sprite.size.height;
+        println("vine height = \(vineHeight)")
         var totalVines : CGFloat = vineHeight * CGFloat(amount);
         
          println("Total vines: \(amount)")
@@ -155,8 +158,9 @@ class MainGame: SKScene {
         println("Scale: \(scaleAmount)");
         
         start = false;
-        
-        var currentVine : vineStruct = vineArray.first!
+        let midX = self.size.width/2.0
+        var height:CGFloat = 0
+
         //Last loop through vines
         for vine in vineArray {
             
@@ -166,10 +170,11 @@ class MainGame: SKScene {
             vine.sprite.yScale = scaleAmount
                 
             var addAmount : CGFloat = vine.sprite.size.height
-            vine.sprite.position.y = currentVine.sprite.position.y + addAmount
+            vine.sprite.position.y = height
+            height += vine.sprite.size.height
                 
-                
-            currentVine = vine;
+            let curX = midX + (CGFloat(vine.deviation) * vine.sprite.size.width)
+            vine.sprite.position.x = curX
                 
             }
         }

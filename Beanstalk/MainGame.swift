@@ -26,6 +26,13 @@ struct vineStruct {
     var sprite: SKSpriteNode
 }
 
+enum BodyType:UInt32 {
+    
+    case vine = 1;
+    case jack = 2;
+    case background = 4;
+    
+}
 
 
 class MainGame: SKScene {
@@ -37,11 +44,11 @@ class MainGame: SKScene {
     var jack: SKSpriteNode!
     
     func swipedRight(sender:UISwipeGestureRecognizer){
-        println("swiped right")
+        moveRight()
     }
     
     func swipedLeft(sender:UISwipeGestureRecognizer){
-        println("swiped left")
+        moveLeft()
     }
     
     func swipedUp(sender:UISwipeGestureRecognizer){
@@ -52,6 +59,15 @@ class MainGame: SKScene {
         println("swiped down")
     }
     
+    func moveLeft() {
+        jack.position.x -= CGFloat(SectionWidth);
+    }
+    
+    
+    func moveRight() {
+        jack.position.x += CGFloat(SectionWidth);
+    }
+    
     
 
     func buildVine() {
@@ -60,7 +76,7 @@ class MainGame: SKScene {
         let midX = self.size.width/2.0
 
         for var i = 0; i < MaxHeight; i++ {
-            var object = SKSpriteNode(color: UIColor.greenColor(), size: CGSize(width: SectionWidth, height: SectionHeight))
+            var object : SKSpriteNode = SKSpriteNode(color: UIColor.greenColor(), size: CGSize(width: SectionWidth, height: SectionHeight))
             let currentHeight = CGFloat(SectionHeight * i)
             straightCount--;
             if (straightCount == 0) {
@@ -102,9 +118,33 @@ class MainGame: SKScene {
     
     func moveVine() {
         for vine in vineArray {
+            
             vine.sprite.position.y -= 8;
         }
+        
+        
     }
+    
+    func fallDetection() {
+        
+        var dead : Bool = true;
+        var point : CGPoint = jack.position;
+        
+        for vine in vineArray {
+            
+            if(vine.sprite.containsPoint(point)){
+                dead=false;
+            }
+            
+        }
+        
+        if(dead==true) {
+            println("You lost!")
+        }
+        
+    }
+    
+    
     
     
     
@@ -162,6 +202,7 @@ class MainGame: SKScene {
         
         if (start) {
             moveVine()
+            fallDetection()
         }
     }
 }

@@ -47,10 +47,10 @@ class GameScene: SKScene {
                 highlightButton(Level1!)
             }
             if (Level2!.containsPoint(location)) {
-                highlightButton(Level1!)
+                highlightButton(Level2!)
             }
             if (Level3!.containsPoint(location)) {
-                highlightButton(Level1!)
+                highlightButton(Level3!)
             }
             
         }

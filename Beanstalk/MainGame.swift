@@ -22,7 +22,7 @@ let SectionWidth = 60
 let straightDelay = 7
 
 struct vineStruct {
-    var direction: Int
+    var deviation : Int
     var sprite: SKSpriteNode
 }
 
@@ -99,7 +99,7 @@ class MainGame: SKScene {
                 var WideObject = SKSpriteNode(color: UIColor.greenColor(), size: CGSize(width: SectionWidth, height: SectionHeight))
                     let curX = midX + CGFloat((oldDev - MaxDeviation/2) * SectionWidth)
                     WideObject.position = CGPoint(x: curX, y:currentHeight)
-                    let newElem = vineStruct(direction: 0, sprite: WideObject)
+                    let newElem = vineStruct(deviation: deviation, sprite: WideObject)
                     vineArray.append(newElem)
                     addChild(WideObject)
                 }
@@ -109,7 +109,7 @@ class MainGame: SKScene {
             let curX = midX + CGFloat((deviation - MaxDeviation/2) * SectionWidth)
             println ("add block @ \(curX),\(currentHeight)")
             object.position = CGPoint(x: curX, y: currentHeight)
-            let newElem = vineStruct(direction: 0, sprite: object)
+            let newElem = vineStruct(deviation: deviation, sprite: object)
             vineArray.append(newElem)
             addChild(object)
         }
@@ -117,30 +117,56 @@ class MainGame: SKScene {
     
     
     func moveVine() {
-        for vine in vineArray {
-            
-            vine.sprite.position.y -= 8;
-        }
-        
-        
-    }
-    
-    func fallDetection() {
         
         var dead : Bool = true;
         var point : CGPoint = jack.position;
+        
         
         for vine in vineArray {
             
             if(vine.sprite.containsPoint(point)){
                 dead=false;
             }
-            
+          
+            vine.sprite.position.y -= 8;
         }
         
         if(dead==true) {
-            println("You lost!")
+            die();
         }
+    }
+    
+    func die() {
+        
+        var amount : Int = vineArray.count
+        var sceneheight = UIScreen.mainScreen().bounds.height
+        var vineHeight : CGFloat = vineArray.first!.sprite.size.height;
+        
+        var totalVines : CGFloat = vineHeight * CGFloat(amount);
+        
+        var scaleAmount : CGFloat = sceneheight / totalVines
+        
+        start = false;
+        
+        var currentVine : vineStruct = vineArray.first!
+        //Last loop through vines
+        for vine in vineArray {
+            
+            if(vine.sprite != vineArray.first?.sprite) {
+            
+            vine.sprite.xScale = scaleAmount
+            vine.sprite.yScale = scaleAmount
+                
+            var addAmount : CGFloat = vine.sprite.size.height
+            vine.sprite.position.y = currentVine.sprite.position.y + addAmount
+                
+                
+            currentVine = vine;
+                
+            }
+        }
+        
+        start = false;
         
     }
     
@@ -202,7 +228,6 @@ class MainGame: SKScene {
         
         if (start) {
             moveVine()
-            fallDetection()
         }
     }
 }

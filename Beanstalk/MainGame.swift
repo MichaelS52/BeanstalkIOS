@@ -140,11 +140,19 @@ class MainGame: SKScene {
         
         var amount : Int = vineArray.count
         var sceneheight = UIScreen.mainScreen().bounds.height
+        
+        println("Scene Height: \(sceneheight)")
+        
         var vineHeight : CGFloat = vineArray.first!.sprite.size.height;
         
         var totalVines : CGFloat = vineHeight * CGFloat(amount);
         
+         println("Total vines: \(amount)")
+        println("Total: \(vineHeight)")
+        
         var scaleAmount : CGFloat = sceneheight / totalVines
+        
+        println("Scale: \(scaleAmount)");
         
         start = false;
         

@@ -183,7 +183,8 @@ class MainGame: SKScene {
         }
         
         start = false;
-        
+        let scene = GameScene(fileNamed: "GameScene.swift")
+        view?.presentScene(scene)
     }
     
     

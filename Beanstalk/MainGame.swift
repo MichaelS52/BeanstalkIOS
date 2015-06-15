@@ -76,7 +76,9 @@ class MainGame: SKScene {
         let midX = self.size.width/2.0
 
         for var i = 0; i < MaxHeight; i++ {
-            var object : SKSpriteNode = SKSpriteNode(color: UIColor.greenColor(), size: CGSize(width: SectionWidth, height: SectionHeight))
+            //var object : SKSpriteNode = SKSpriteNode(color: UIColor.greenColor(), size: CGSize(width: SectionWidth, height: SectionHeight))
+            //var vTexture = SKTexture(imageNamed: <#String#>)
+            var object : SKSpriteNode = SKSpriteNode(imageNamed: "V5.png");
             let currentHeight = CGFloat(SectionHeight * i)
             straightCount--;
             if (straightCount == 0) {

@@ -60,12 +60,16 @@ class MainGame: SKScene {
     }
     
     func moveLeft() {
+        if(start==true) {
         jack.position.x -= CGFloat(SectionWidth);
+        }
     }
     
     
     func moveRight() {
+        if(start==true) {
         jack.position.x += CGFloat(SectionWidth);
+        }
     }
     
     
@@ -145,11 +149,18 @@ class MainGame: SKScene {
         var sceneheight = UIScreen.mainScreen().bounds.height
         println("height = \(sceneheight)")
         
+        println("Scene Height: \(sceneheight)")
+        
         var vineHeight : CGFloat = vineArray.first!.sprite.size.height;
         println("vine height = \(vineHeight)")
         var totalVines : CGFloat = vineHeight * CGFloat(amount);
-        println("totalVines = \(totalVines)")
+        
+         println("Total vines: \(amount)")
+        println("Total: \(vineHeight)")
+        
         var scaleAmount : CGFloat = sceneheight / totalVines
+        
+        println("Scale: \(scaleAmount)");
         
         start = false;
         let midX = self.size.width/2.0
